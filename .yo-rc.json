@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.ipi.wikicodia"
+    },
+    "jhipsterVersion": "6.10.1",
+    "applicationType": "monolith",
+    "baseName": "Wikicodia",
+    "packageName": "com.ipi.wikicodia",
+    "packageFolder": "com/ipi/wikicodia",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "OWZkYjljYWExMzM2MTQ5ZjUwODMwODBlM2FiY2I1ZmUzNmZhOGRlYmVhMjVjYmM3ZTUxNTI4MjM4NDQ4MjFkMjk5NmY3NDMzZWFkOTBhNzM5MDQ4ZWFkMjZkODBiNmFjMzZiZWYyODI0N2NlYWEyYmY1N2M0MzdkZWVkNzVjNzE=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "darkly",
+    "clientThemeVariant": "primary",
+    "creationTimestamp": 1595755564258,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}
