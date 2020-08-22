@@ -48,6 +48,17 @@ public class CacheConfiguration {
             createCache(cm, com.ipi.wikicodia.domain.User.class.getName());
             createCache(cm, com.ipi.wikicodia.domain.Authority.class.getName());
             createCache(cm, com.ipi.wikicodia.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.ipi.wikicodia.domain.Language.class.getName());
+            createCache(cm, com.ipi.wikicodia.domain.Framework.class.getName());
+            createCache(cm, com.ipi.wikicodia.domain.Vote.class.getName());
+            createCache(cm, com.ipi.wikicodia.domain.Category.class.getName());
+            createCache(cm, com.ipi.wikicodia.domain.Article.class.getName());
+            createCache(cm, com.ipi.wikicodia.domain.Article.class.getName() + ".ratings");
+            createCache(cm, com.ipi.wikicodia.domain.Article.class.getName() + ".languages");
+            createCache(cm, com.ipi.wikicodia.domain.Article.class.getName() + ".frameworks");
+            createCache(cm, com.ipi.wikicodia.domain.Vote.class.getName() + ".articleIds");
+            createCache(cm, com.ipi.wikicodia.domain.Language.class.getName() + ".articleIds");
+            createCache(cm, com.ipi.wikicodia.domain.Framework.class.getName() + ".articleIds");
             // jhipster-needle-ehcache-add-entry
         };
     }

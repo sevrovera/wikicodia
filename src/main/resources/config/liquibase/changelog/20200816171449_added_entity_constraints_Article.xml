@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity Article.
+    -->
+    <changeSet id="20200816171449-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="category_id"
+                                 baseTableName="article"
+                                 constraintName="fk_article_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category"/>
+
+        <addForeignKeyConstraint baseColumnNames="author_id"
+                                 baseTableName="article"
+                                 constraintName="fk_article_author_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="article_id"
+                                 baseTableName="article_ratings"
+                                 constraintName="fk_article_ratings_article_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="article"/>
+
+        <addForeignKeyConstraint baseColumnNames="ratings_id"
+                                 baseTableName="article_ratings"
+                                 constraintName="fk_article_ratings_ratings_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vote"/>
+        
+        <addForeignKeyConstraint baseColumnNames="article_id"
+                                 baseTableName="article_language"
+                                 constraintName="fk_article_language_article_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="article"/>
+
+        <addForeignKeyConstraint baseColumnNames="language_id"
+                                 baseTableName="article_language"
+                                 constraintName="fk_article_language_language_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="language"/>
+        
+        <addForeignKeyConstraint baseColumnNames="article_id"
+                                 baseTableName="article_framework"
+                                 constraintName="fk_article_framework_article_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="article"/>
+
+        <addForeignKeyConstraint baseColumnNames="framework_id"
+                                 baseTableName="article_framework"
+                                 constraintName="fk_article_framework_framework_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="framework"/>
+        
+    </changeSet>
+</databaseChangeLog>

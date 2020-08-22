@@ -1,0 +1,85 @@
+<div>
+    <h2 id="page-heading">
+        <span>Articles</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-article" [routerLink]="['/article/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Article
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="articles?.length === 0">
+        <span>No articles found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="articles && articles.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="title"><span>Title</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="creationDate"><span>Creation Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lastEditDate"><span>Last Edit Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="description"><span>Description</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="isPublished"><span>Is Published</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="isValidated"><span>Is Validated</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="isPromoted"><span>Is Promoted</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="articleType"><span>Article Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="category.nameCategory"><span>Category</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="author.login"><span>Author</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let article of articles ;trackBy: trackId">
+                    <td><a [routerLink]="['/article', article.id, 'view']">{{ article.id }}</a></td>
+                    <td>{{ article.title }}</td>
+                    <td>{{ article.creationDate | date:'mediumDate' }}</td>
+                    <td>{{ article.lastEditDate | date:'mediumDate' }}</td>
+                    <td>{{ article.description }}</td>
+                    <td>{{ article.isPublished }}</td>
+                    <td>{{ article.isValidated }}</td>
+                    <td>{{ article.isPromoted }}</td>
+                    <td>{{ article.articleType }}</td>
+                    <td>
+                        <div *ngIf="article.category">
+                            <a [routerLink]="['/category', article.category?.id, 'view']" >{{ article.category?.nameCategory }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        {{ article.author?.login }}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/article', article.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/article', article.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(article)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

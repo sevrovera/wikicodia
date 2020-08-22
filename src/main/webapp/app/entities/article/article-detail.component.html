@@ -1,0 +1,86 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="article">
+            <h2><span>Article</span> {{ article.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Title</span></dt>
+                <dd>
+                    <span>{{ article.title }}</span>
+                </dd>
+                <dt><span>Creation Date</span></dt>
+                <dd>
+                    <span>{{ article.creationDate }}</span>
+                </dd>
+                <dt><span>Last Edit Date</span></dt>
+                <dd>
+                    <span>{{ article.lastEditDate }}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{ article.description }}</span>
+                </dd>
+                <dt><span>Is Published</span></dt>
+                <dd>
+                    <span>{{ article.isPublished }}</span>
+                </dd>
+                <dt><span>Is Validated</span></dt>
+                <dd>
+                    <span>{{ article.isValidated }}</span>
+                </dd>
+                <dt><span>Is Promoted</span></dt>
+                <dd>
+                    <span>{{ article.isPromoted }}</span>
+                </dd>
+                <dt><span>Article Type</span></dt>
+                <dd>
+                    <span>{{ article.articleType }}</span>
+                </dd>
+                <dt><span>Category</span></dt>
+                <dd>
+                    <div *ngIf="article.category">
+                        <a [routerLink]="['/category', article.category?.id, 'view']">{{ article.category?.nameCategory }}</a>
+                    </div>
+                </dd>
+                <dt><span>Author</span></dt>
+                <dd>
+                    {{ article.author?.login }}
+                </dd>
+                <dt><span>Ratings</span></dt>
+                <dd>
+                    <span *ngFor="let ratings of article.ratings; let last = last">
+                        <a [routerLink]="['/vote', ratings?.id, 'view']">{{ ratings.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+                <dt><span>Language</span></dt>
+                <dd>
+                    <span *ngFor="let language of article.languages; let last = last">
+                        <a [routerLink]="['/language', language?.id, 'view']">{{ language.nameLanguage }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+                <dt><span>Framework</span></dt>
+                <dd>
+                    <span *ngFor="let framework of article.frameworks; let last = last">
+                        <a [routerLink]="['/framework', framework?.id, 'view']">{{ framework.nameFramework }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/article', article.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

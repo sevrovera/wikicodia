@@ -1,0 +1,9 @@
+export const enum ArticleType {
+  TUTORIAL = 'TUTORIAL',
+
+  TROUBLESHOOTING = 'TROUBLESHOOTING',
+
+  OPINION = 'OPINION',
+
+  GEEKCULTURE = 'GEEKCULTURE',
+}
