@@ -5,18 +5,18 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { IArticle, Article } from 'app/shared/model/article.model';
+import { IArticle, Article } from '../../shared/model/article.model';
 import { ArticleService } from './article.service';
-import { ICategory } from 'app/shared/model/category.model';
-import { CategoryService } from 'app/entities/category/category.service';
-import { IUser } from 'app/core/user/user.model';
-import { UserService } from 'app/core/user/user.service';
-import { IVote } from 'app/shared/model/vote.model';
-import { VoteService } from 'app/entities/vote/vote.service';
-import { ILanguage } from 'app/shared/model/language.model';
-import { LanguageService } from 'app/entities/language/language.service';
-import { IFramework } from 'app/shared/model/framework.model';
-import { FrameworkService } from 'app/entities/framework/framework.service';
+import { ICategory } from '../../shared/model/category.model';
+import { CategoryService } from '../../entities/category/category.service';
+import { IUser } from '../../core/user/user.model';
+import { UserService } from '../../core/user/user.service';
+import { IVote } from '../../shared/model/vote.model';
+import { VoteService } from '../../entities/vote/vote.service';
+import { ILanguage } from '../../shared/model/language.model';
+import { LanguageService } from '../../entities/language/language.service';
+import { IFramework } from '../../shared/model/framework.model';
+import { FrameworkService } from '../../entities/framework/framework.service';
 
 type SelectableEntity = ICategory | IUser | IVote | ILanguage | IFramework;
 
@@ -39,12 +39,13 @@ export class ArticleUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     title: [null, [Validators.required, Validators.minLength(5)]],
-    creationDate: [null, [Validators.required]],
+    creationDate: [],
     lastEditDate: [],
     description: [null, [Validators.required, Validators.minLength(20), Validators.maxLength(500)]],
-    isPublished: [null, [Validators.required]],
+    content: [null, [Validators.required, Validators.minLength(200), Validators.maxLength(65535)]],
+    isPublished: [],
     isValidated: [],
-    isPromoted: [null, [Validators.required]],
+    isPromoted: [],
     articleType: [null, [Validators.required]],
     category: [null, Validators.required],
     author: [null, Validators.required],
@@ -87,6 +88,7 @@ export class ArticleUpdateComponent implements OnInit {
       creationDate: article.creationDate,
       lastEditDate: article.lastEditDate,
       description: article.description,
+      content: article.content,
       isPublished: article.isPublished,
       isValidated: article.isValidated,
       isPromoted: article.isPromoted,
@@ -121,6 +123,7 @@ export class ArticleUpdateComponent implements OnInit {
       creationDate: this.editForm.get(['creationDate'])!.value,
       lastEditDate: this.editForm.get(['lastEditDate'])!.value,
       description: this.editForm.get(['description'])!.value,
+      content: this.editForm.get(['content'])!.value,
       isPublished: this.editForm.get(['isPublished'])!.value,
       isValidated: this.editForm.get(['isValidated'])!.value,
       isPromoted: this.editForm.get(['isPromoted'])!.value,

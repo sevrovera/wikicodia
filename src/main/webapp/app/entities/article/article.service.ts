@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
-import { SERVER_API_URL } from 'app/app.constants';
-import { createRequestOption } from 'app/shared/util/request-util';
-import { IArticle } from 'app/shared/model/article.model';
+import { DATE_FORMAT } from '../../shared/constants/input.constants';
+import { SERVER_API_URL } from '../../app.constants';
+import { createRequestOption } from '../../shared/util/request-util';
+import { IArticle } from '../../shared/model/article.model';
 
 type EntityResponseType = HttpResponse<IArticle>;
 type EntityArrayResponseType = HttpResponse<IArticle[]>;

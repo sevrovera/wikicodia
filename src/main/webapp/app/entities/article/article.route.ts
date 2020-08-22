@@ -4,9 +4,9 @@ import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
-import { Authority } from 'app/shared/constants/authority.constants';
-import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { IArticle, Article } from 'app/shared/model/article.model';
+import { Authority } from '../../shared/constants/authority.constants';
+import { UserRouteAccessService } from '../../core/auth/user-route-access-service';
+import { IArticle, Article } from '../../shared/model/article.model';
 import { ArticleService } from './article.service';
 import { ArticleComponent } from './article.component';
 import { ArticleDetailComponent } from './article-detail.component';

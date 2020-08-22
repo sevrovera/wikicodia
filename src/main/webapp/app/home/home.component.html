@@ -4,17 +4,23 @@
     </div>
 
     <div class="col-md-9">
-
+        
         <div [ngSwitch]="isAuthenticated()">
+
             <div *ngSwitchCase="false">
                 <h1 class="display-4">Welcome to Wikicodia!</h1>
             </div>
             <div *ngSwitchCase="true">
-                <h1 class="display-4">Welcome to Wikicodia, {{ account.login }}!</h1>
+                <h1 class="display-4">Welcome to Wikicodia, {{ account!.login }}!</h1>
             </div>
+             
         </div>
+        <!--
+        <div>
+            <h1 class="display-4">Welcome to Wikicodia!</h1>
+        </div>
+        -->
         
-
         <p class="lead">A plateform for junior developers to learn and share tips</p>
 
         <div [ngSwitch]="isAuthenticated()">
@@ -31,7 +37,7 @@
 
             <div *ngSwitchCase="true">
                 <div class="alert alert-success">
-                    <a routerLink="article">Browse the library</a></li>
+                    <a routerLink="article">Browse the library</a>
                 </div>
                 <div class="alert alert-success">
                     <a routerLink="article/new">Write an article</a>

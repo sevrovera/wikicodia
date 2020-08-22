@@ -70,13 +70,14 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should update a Article', () => {
+      it('should update an article', () => {
         const returnedFromService = Object.assign(
           {
             title: 'BBBBBB',
             creationDate: currentDate.format(DATE_FORMAT),
             lastEditDate: currentDate.format(DATE_FORMAT),
             description: 'BBBBBB',
+            content: 'BBBBBB',
             isPublished: true,
             isValidated: true,
             isPromoted: true,
@@ -107,6 +108,7 @@ describe('Service Tests', () => {
             creationDate: currentDate.format(DATE_FORMAT),
             lastEditDate: currentDate.format(DATE_FORMAT),
             description: 'BBBBBB',
+            content: 'BBBBBB',
             isPublished: true,
             isValidated: true,
             isPromoted: true,

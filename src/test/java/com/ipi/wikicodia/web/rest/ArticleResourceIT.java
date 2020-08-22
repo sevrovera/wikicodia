@@ -54,6 +54,9 @@ public class ArticleResourceIT {
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAAAAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBBBBBBBBBBBB";
+    
+    private static final String DEFAULT_CONTENT = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+    private static final String UPDATED_CONTENT = "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB";
 
     private static final Boolean DEFAULT_IS_PUBLISHED = false;
     private static final Boolean UPDATED_IS_PUBLISHED = true;
@@ -93,6 +96,7 @@ public class ArticleResourceIT {
             .creationDate(DEFAULT_CREATION_DATE)
             .lastEditDate(DEFAULT_LAST_EDIT_DATE)
             .description(DEFAULT_DESCRIPTION)
+            .content(DEFAULT_CONTENT)
             .isPublished(DEFAULT_IS_PUBLISHED)
             .isValidated(DEFAULT_IS_VALIDATED)
             .isPromoted(DEFAULT_IS_PROMOTED)
@@ -136,6 +140,7 @@ public class ArticleResourceIT {
             .creationDate(UPDATED_CREATION_DATE)
             .lastEditDate(UPDATED_LAST_EDIT_DATE)
             .description(UPDATED_DESCRIPTION)
+            .content(UPDATED_CONTENT)
             .isPublished(UPDATED_IS_PUBLISHED)
             .isValidated(UPDATED_IS_VALIDATED)
             .isPromoted(UPDATED_IS_PROMOTED)
@@ -191,6 +196,7 @@ public class ArticleResourceIT {
         assertThat(testArticle.getCreationDate()).isEqualTo(DEFAULT_CREATION_DATE);
         assertThat(testArticle.getLastEditDate()).isEqualTo(DEFAULT_LAST_EDIT_DATE);
         assertThat(testArticle.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testArticle.getContent()).isEqualTo(DEFAULT_CONTENT);
         assertThat(testArticle.isIsPublished()).isEqualTo(DEFAULT_IS_PUBLISHED);
         assertThat(testArticle.isIsValidated()).isEqualTo(DEFAULT_IS_VALIDATED);
         assertThat(testArticle.isIsPromoted()).isEqualTo(DEFAULT_IS_PROMOTED);
@@ -264,6 +270,23 @@ public class ArticleResourceIT {
 
         // Create the Article, which fails.
 
+        restArticleMockMvc.perform(post("/api/articles")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(article)))
+            .andExpect(status().isBadRequest());
+
+        List<Article> articleList = articleRepository.findAll();
+        assertThat(articleList).hasSize(databaseSizeBeforeTest);
+    }
+    
+    @Test
+    @Transactional
+    public void checkContentIsRequired() throws Exception {
+        int databaseSizeBeforeTest = articleRepository.findAll().size();
+        // set the field null
+        article.setContent(null);
+
+        // Create the Article, which fails.
 
         restArticleMockMvc.perform(post("/api/articles")
             .contentType(MediaType.APPLICATION_JSON)
@@ -346,6 +369,7 @@ public class ArticleResourceIT {
             .andExpect(jsonPath("$.[*].creationDate").value(hasItem(DEFAULT_CREATION_DATE.toString())))
             .andExpect(jsonPath("$.[*].lastEditDate").value(hasItem(DEFAULT_LAST_EDIT_DATE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT)))
             .andExpect(jsonPath("$.[*].isPublished").value(hasItem(DEFAULT_IS_PUBLISHED.booleanValue())))
             .andExpect(jsonPath("$.[*].isValidated").value(hasItem(DEFAULT_IS_VALIDATED.booleanValue())))
             .andExpect(jsonPath("$.[*].isPromoted").value(hasItem(DEFAULT_IS_PROMOTED.booleanValue())))
@@ -387,6 +411,7 @@ public class ArticleResourceIT {
             .andExpect(jsonPath("$.creationDate").value(DEFAULT_CREATION_DATE.toString()))
             .andExpect(jsonPath("$.lastEditDate").value(DEFAULT_LAST_EDIT_DATE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT))
             .andExpect(jsonPath("$.isPublished").value(DEFAULT_IS_PUBLISHED.booleanValue()))
             .andExpect(jsonPath("$.isValidated").value(DEFAULT_IS_VALIDATED.booleanValue()))
             .andExpect(jsonPath("$.isPromoted").value(DEFAULT_IS_PROMOTED.booleanValue()))
@@ -417,6 +442,7 @@ public class ArticleResourceIT {
             .creationDate(UPDATED_CREATION_DATE)
             .lastEditDate(UPDATED_LAST_EDIT_DATE)
             .description(UPDATED_DESCRIPTION)
+            .content(UPDATED_CONTENT)
             .isPublished(UPDATED_IS_PUBLISHED)
             .isValidated(UPDATED_IS_VALIDATED)
             .isPromoted(UPDATED_IS_PROMOTED)
@@ -435,6 +461,7 @@ public class ArticleResourceIT {
         assertThat(testArticle.getCreationDate()).isEqualTo(UPDATED_CREATION_DATE);
         assertThat(testArticle.getLastEditDate()).isEqualTo(UPDATED_LAST_EDIT_DATE);
         assertThat(testArticle.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testArticle.getContent()).isEqualTo(UPDATED_CONTENT);
         assertThat(testArticle.isIsPublished()).isEqualTo(UPDATED_IS_PUBLISHED);
         assertThat(testArticle.isIsValidated()).isEqualTo(UPDATED_IS_VALIDATED);
         assertThat(testArticle.isIsPromoted()).isEqualTo(UPDATED_IS_PROMOTED);

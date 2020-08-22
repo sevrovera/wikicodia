@@ -4,9 +4,9 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IArticle } from 'app/shared/model/article.model';
+import { IArticle } from '../../shared/model/article.model';
 
-import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
+import { ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants';
 import { ArticleService } from './article.service';
 import { ArticleDeleteDialogComponent } from './article-delete-dialog.component';
 

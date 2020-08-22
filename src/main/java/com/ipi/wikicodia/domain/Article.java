@@ -34,26 +34,31 @@ public class Article implements Serializable {
     private String title;
 
     @NotNull
-    @Column(name = "creation_date", nullable = false)
-    private LocalDate creationDate;
+    @Column(name = "creation_date")
+    private LocalDate creationDate = LocalDate.now();
 
     @Column(name = "last_edit_date")
-    private LocalDate lastEditDate;
+    private LocalDate lastEditDate = LocalDate.now();
 
     @NotNull
     @Size(min = 20, max = 500)
     @Column(name = "description", length = 500, nullable = false)
     private String description;
+    
+    @NotNull
+    @Size(min = 100, max = 65535)
+    @Column(name = "content", length = 65535, nullable = false)
+    private String content;
 
     @NotNull
-    @Column(name = "is_published", nullable = false)
+    @Column(name = "is_published")
     private Boolean isPublished;
 
     @Column(name = "is_validated")
     private Boolean isValidated;
 
     @NotNull
-    @Column(name = "is_promoted", nullable = false)
+    @Column(name = "is_promoted")
     private Boolean isPromoted;
 
     @NotNull
@@ -152,6 +157,19 @@ public class Article implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public String getContent() {
+        return content;
+    }
+
+    public Article content(String content) {
+        this.content = content;
+        return this;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Boolean isIsPublished() {
@@ -306,7 +324,6 @@ public class Article implements Serializable {
     public void setFrameworks(Set<Framework> frameworks) {
         this.frameworks = frameworks;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -324,7 +341,6 @@ public class Article implements Serializable {
         return 31;
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
         return "Article{" +
@@ -333,6 +349,7 @@ public class Article implements Serializable {
             ", creationDate='" + getCreationDate() + "'" +
             ", lastEditDate='" + getLastEditDate() + "'" +
             ", description='" + getDescription() + "'" +
+            ", content='" + getContent() + "'" +
             ", isPublished='" + isIsPublished() + "'" +
             ", isValidated='" + isIsValidated() + "'" +
             ", isPromoted='" + isIsPromoted() + "'" +

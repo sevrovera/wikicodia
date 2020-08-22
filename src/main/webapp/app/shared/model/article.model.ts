@@ -12,6 +12,7 @@ export interface IArticle {
   creationDate?: Moment;
   lastEditDate?: Moment;
   description?: string;
+  content?: string;
   isPublished?: boolean;
   isValidated?: boolean;
   isPromoted?: boolean;
@@ -30,6 +31,7 @@ export class Article implements IArticle {
     public creationDate?: Moment,
     public lastEditDate?: Moment,
     public description?: string,
+    public content?: string,
     public isPublished?: boolean,
     public isValidated?: boolean,
     public isPromoted?: boolean,

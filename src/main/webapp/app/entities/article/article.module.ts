@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { WikicodiaSharedModule } from 'app/shared/shared.module';
+import { WikicodiaSharedModule } from '../../shared/shared.module';
 import { ArticleComponent } from './article.component';
 import { ArticleDetailComponent } from './article-detail.component';
 import { ArticleUpdateComponent } from './article-update.component';

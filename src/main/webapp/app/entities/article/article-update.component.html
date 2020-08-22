@@ -26,33 +26,7 @@
                         </small>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" for="field_creationDate">Creation Date</label>
-                    <div class="input-group">
-                        <input id="field_creationDate" type="text" class="form-control" name="creationDate" ngbDatepicker #creationDateDp="ngbDatepicker" formControlName="creationDate"/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="creationDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
-                        </span>
-                    </div>
-                    <div *ngIf="editForm.get('creationDate')!.invalid && (editForm.get('creationDate')!.dirty || editForm.get('creationDate')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('creationDate')?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" for="field_lastEditDate">Last Edit Date</label>
-                    <div class="input-group">
-                        <input id="field_lastEditDate" type="text" class="form-control" name="lastEditDate" ngbDatepicker #lastEditDateDp="ngbDatepicker" formControlName="lastEditDate"/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="lastEditDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-
+            
                 <div class="form-group">
                     <label class="form-control-label" for="field_description">Description</label>
                     <input type="text" class="form-control" name="description" id="field_description"
@@ -74,31 +48,21 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_isPublished">Is Published</label>
-                    <input type="checkbox" class="form-control" name="isPublished" id="field_isPublished"
-                           formControlName="isPublished"/>
-                    <div *ngIf="editForm.get('isPublished')!.invalid && (editForm.get('isPublished')!.dirty || editForm.get('isPublished')!.touched)">
+                    <label class="form-control-label" for="field_content">Content</label>
+                    <textarea rows = "20" cols = "60" class="form-control" name="content" id="field_content" formControlName="content">
+                    </textarea>
+                    <div *ngIf="editForm.get('content')!.invalid && (editForm.get('content')!.dirty || editForm.get('content')!.touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('isPublished')?.errors?.required">
+                               *ngIf="editForm.get('content')?.errors?.required">
                         This field is required.
                         </small>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" for="field_isValidated">Is Validated</label>
-                    <input type="checkbox" class="form-control" name="isValidated" id="field_isValidated"
-                           formControlName="isValidated"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" for="field_isPromoted">Is Promoted</label>
-                    <input type="checkbox" class="form-control" name="isPromoted" id="field_isPromoted"
-                           formControlName="isPromoted"/>
-                    <div *ngIf="editForm.get('isPromoted')!.invalid && (editForm.get('isPromoted')!.dirty || editForm.get('isPromoted')!.touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('isPromoted')?.errors?.required">
-                        This field is required.
+                               *ngIf="editForm.get('content')?.errors?.minlength">
+                        This field is required to be at least 200 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('content')?.errors?.maxlength">
+                        This field cannot be longer than 65535 characters.
                         </small>
                     </div>
                 </div>
@@ -134,27 +98,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_author">Author</label>
-                    <select class="form-control" id="field_author" name="author" formControlName="author">
-                        <option *ngIf="!editForm.get('author')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="userOption.id === editForm.get('author')!.value?.id ? editForm.get('author')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
-                    </select>
-                </div>
-                <div *ngIf="editForm.get('author')!.invalid && (editForm.get('author')!.dirty || editForm.get('author')!.touched)">
-                    <small class="form-text text-danger"
-                           *ngIf="editForm.get('author')?.errors?.required">
-                        This field is required.
-                    </small>
-                </div>
-
-                <div class="form-group">
-                    <label for="field_ratings">Ratings</label>
-                    <select class="form-control" id="field_ratings" multiple name="ratings" formControlName="ratings">
-                        <option [ngValue]="getSelected(editForm.get('ratings')!.value, voteOption)" *ngFor="let voteOption of votes; trackBy: trackById">{{ voteOption.id }}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label for="field_languages">Language</label>
                     <select class="form-control" id="field_languages" multiple name="languages" formControlName="languages">
                         <option [ngValue]="getSelected(editForm.get('languages')!.value, languageOption)" *ngFor="let languageOption of languages; trackBy: trackById">{{ languageOption.nameLanguage }}</option>
@@ -173,6 +116,97 @@
                         <option [ngValue]="getSelected(editForm.get('frameworks')!.value, frameworkOption)" *ngFor="let frameworkOption of frameworks; trackBy: trackById">{{ frameworkOption.nameFramework }}</option>
                     </select>
                 </div>
+            
+                <div class="form-group">
+                    <label class="form-control-label" for="field_author">Author</label>
+                    <select class="form-control" id="field_author" name="author" formControlName="author">
+                        <option *ngIf="!editForm.get('author')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="userOption.id === editForm.get('author')!.value?.id ? editForm.get('author')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('author')!.invalid && (editForm.get('author')!.dirty || editForm.get('author')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('author')?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            
+            <!--
+                <div class="form-group">
+                    <label class="form-control-label" for="field_creationDate">Creation Date</label>
+                    <div class="input-group">
+                        <input id="field_creationDate" type="text" class="form-control" name="creationDate" ngbDatepicker #creationDateDp="ngbDatepicker" formControlName="creationDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="creationDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('creationDate')!.invalid && (editForm.get('creationDate')!.dirty || editForm.get('creationDate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('creationDate')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+            
+            
+                <div class="form-group">
+                    <label class="form-control-label" for="field_lastEditDate">Last Edit Date</label>
+                    <div class="input-group">
+                        <input id="field_lastEditDate" type="text" class="form-control" name="lastEditDate" ngbDatepicker #lastEditDateDp="ngbDatepicker" formControlName="lastEditDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="lastEditDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+            
+            -->
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_isPublished">Tick box if you wish to publish</label>
+                    <input type="checkbox" class="form-control" name="isPublished" id="field_isPublished"
+                           formControlName="isPublished"/>
+                    <!--
+                    <div *ngIf="editForm.get('isPublished')!.invalid && (editForm.get('isPublished')!.dirty || editForm.get('isPublished')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('isPublished')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                    -->
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_isPromoted">Tick box if you wish to promote this article (admin only)</label>
+                    <input type="checkbox" class="form-control" name="isPromoted" id="field_isPromoted"
+                           formControlName="isPromoted"/>
+                    <!--
+                    <div *ngIf="editForm.get('isPromoted')!.invalid && (editForm.get('isPromoted')!.dirty || editForm.get('isPromoted')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('isPromoted')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                    -->
+                </div>
+
+            <!-- 
+                <div class="form-group">
+                    <label class="form-control-label" for="field_isValidated">Is Validated</label>
+                    <input type="checkbox" class="form-control" name="isValidated" id="field_isValidated"
+                           formControlName="isValidated"/>
+                </div>
+
+            -->
+            
+            <!--
+                <div class="form-group">
+                    <label for="field_ratings">Ratings</label>
+                    <select class="form-control" id="field_ratings" multiple name="ratings" formControlName="ratings">
+                        <option [ngValue]="getSelected(editForm.get('ratings')!.value, voteOption)" *ngFor="let voteOption of votes; trackBy: trackById">{{ voteOption.id }}</option>
+                    </select>
+                </div>
+            -->
+                
             </div>
 
             <div>
