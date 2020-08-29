@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, Routes } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
-import { User, IUser } from 'app/core/user/user.model';
-import { UserService } from 'app/core/user/user.service';
+import { User, IUser } from '../../core/user/user.model';
+import { UserService } from '../../core/user/user.service';
 import { UserManagementComponent } from './user-management.component';
 import { UserManagementDetailComponent } from './user-management-detail.component';
 import { UserManagementUpdateComponent } from './user-management-update.component';

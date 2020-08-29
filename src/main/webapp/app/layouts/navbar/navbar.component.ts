@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { VERSION } from 'app/app.constants';
-import { AccountService } from 'app/core/auth/account.service';
-import { LoginModalService } from 'app/core/login/login-modal.service';
-import { LoginService } from 'app/core/login/login.service';
-import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { VERSION } from '../../app.constants';
+import { AccountService } from '../../core/auth/account.service';
+import { LoginModalService } from '../../core/login/login-modal.service';
+import { LoginService } from '../../core/login/login.service';
+import { ProfileService } from '../../layouts/profiles/profile.service';
+
+import { Global } from '../../global';
 
 @Component({
   selector: 'jhi-navbar',
@@ -17,15 +19,18 @@ export class NavbarComponent implements OnInit {
   isNavbarCollapsed = true;
   swaggerEnabled?: boolean;
   version: string;
+  global: Global;
 
   constructor(
     private loginService: LoginService,
     private accountService: AccountService,
     private loginModalService: LoginModalService,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    global: Global
   ) {
     this.version = VERSION ? (VERSION.toLowerCase().startsWith('v') ? VERSION : 'v' + VERSION) : '';
+    this.global = global;
   }
 
   ngOnInit(): void {
@@ -35,7 +40,8 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  collapseNavbar(): void {
+  collapseNavbar(clickedMenuOption): void {
+    this.global.menuItemClicked = clickedMenuOption;
     this.isNavbarCollapsed = true;
   }
 
@@ -48,7 +54,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(): void {
-    this.collapseNavbar();
+    // this.collapseNavbar();
     this.loginService.logout();
     this.router.navigate(['']);
   }

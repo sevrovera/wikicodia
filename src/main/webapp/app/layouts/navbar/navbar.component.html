@@ -18,7 +18,7 @@
             </li>
 
             <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >
-                <a class="nav-link" routerLink="article" (click)="collapseNavbar()">
+                <a class="nav-link" routerLink="article" (click)="collapseNavbar('Library')">
                     <span>
                         <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
                         <span>Library</span>
@@ -39,21 +39,21 @@
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
 
                     <li>
-                        <a class="dropdown-item" routerLink="article" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="article" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar('MyArticles')">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
                             <span>My Articles</span>
                         </a>
                     </li>
 
                     <li>
-                        <a class="dropdown-item" routerLink="article" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="article" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar('MyFavorites')">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
                             <span>My Favorites</span>
                         </a>
                     </li>
 
                     <li>
-                        <a class="dropdown-item" routerLink="article" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="article" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar('RecommendedForMe')">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
                             <span>Recommended for me</span>
                         </a>
@@ -84,7 +84,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item" routerLink="article" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="article" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar('AwaitingValidation')">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
                             <span>Articles awaiting validation</span>
                         </a>

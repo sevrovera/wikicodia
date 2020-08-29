@@ -9,14 +9,21 @@ import { SERVER_API_URL } from '../../app.constants';
 import { createRequestOption } from '../../shared/util/request-util';
 import { IArticle } from '../../shared/model/article.model';
 
+import { Global } from '../../global';
+
 type EntityResponseType = HttpResponse<IArticle>;
 type EntityArrayResponseType = HttpResponse<IArticle[]>;
 
 @Injectable({ providedIn: 'root' })
 export class ArticleService {
   public resourceUrl = SERVER_API_URL + 'api/articles';
+  public resourceUrlMyArticles = SERVER_API_URL + 'api/articles/my-articles/user';
+  public resourceUrlAwaitingValidation = SERVER_API_URL + 'api/articles/awaiting validation';
+  global: Global;
 
-  constructor(protected http: HttpClient) {}
+  constructor(protected http: HttpClient, global: Global) {
+    this.global = global;
+  }
 
   create(article: IArticle): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(article);
@@ -40,9 +47,20 @@ export class ArticleService {
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http
-      .get<IArticle[]>(this.resourceUrl, { params: options, observe: 'response' })
-      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    alert(this.global.menuItemClicked);
+    if (this.global.menuItemClicked === 'Library') {
+      return this.http
+        .get<IArticle[]>(this.resourceUrl, { params: options, observe: 'response' })
+        .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    } else if (this.global.menuItemClicked === 'MyArticles') {
+      return this.http
+        .get<IArticle[]>(this.resourceUrlMyArticles, { params: options, observe: 'response' })
+        .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    } else if (this.global.menuItemClicked === 'AwaitingValidation') {
+      return this.http
+        .get<IArticle[]>(this.resourceUrlMyArticles, { params: options, observe: 'response' })
+        .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {

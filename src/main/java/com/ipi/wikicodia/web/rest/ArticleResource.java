@@ -96,11 +96,11 @@ public class ArticleResource {
     public ResponseEntity<List<Article>> getAllArticles(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get a page of Articles");
         Page<Article> page;
-        if (eagerload) {
-            page = articleRepository.findAllWithEagerRelationships(pageable);
-        } else {
-            page = articleRepository.findAll(pageable);
-        }
+        //if (eagerload) {
+            //page = articleRepository.findAllWithEagerRelationships(pageable);
+        //} else {
+            page = articleRepository.findByIsPublishedAndIsValidated(pageable);
+        //}
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -112,7 +112,7 @@ public class ArticleResource {
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of articles in body.
      */
-    @GetMapping("/my-articles")
+    @GetMapping("/articles/my-articles/user")
     public ResponseEntity<List<Article>> getMyArticles(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get a page of Articles");
         Page<Article> page;
@@ -132,7 +132,7 @@ public class ArticleResource {
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of articles in body.
      */
-    @GetMapping("/awaiting-validation")
+    @GetMapping("articles/awaiting-validation")
     public ResponseEntity<List<Article>> getArticlesAwaitingValidation(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get a page of Articles");
         Page<Article> page;
