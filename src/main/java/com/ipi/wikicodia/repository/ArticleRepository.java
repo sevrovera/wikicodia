@@ -19,6 +19,12 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     @Query("select article from Article article where article.author.login = ?#{principal.username}")
     List<Article> findByAuthorIsCurrentUser();
+    
+    @Query("select article from Article article where article.author.login = ?#{principal.username}")
+    Page<Article> findByAuthorIsCurrentUser(Pageable pageable);
+    
+    @Query("select article from Article article where article.isValidated = 0 and article.isPublished = 1")
+    Page<Article> findByIsPublishedAndNotValidated(Pageable pageable);
 
     @Query(value = "select distinct article from Article article left join fetch article.ratings left join fetch article.languages left join fetch article.frameworks",
         countQuery = "select count(distinct article) from Article article")
